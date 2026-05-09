@@ -1,0 +1,28 @@
+{
+  "name": "Fleamane Dev",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Anthropic.claude-code"
+      ],
+      "settings": {
+        "[go]": {
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+          }
+        }
+      }
+    }
+  },
+
+  "forwardPorts": [8080],
+
+  "postCreateCommand": "cd /workspace && [ -f go.mod ] && go mod download || true",
+
+  "remoteUser": "vscode"
+}

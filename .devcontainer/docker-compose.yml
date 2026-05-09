@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace:cached
+      - go-mod-cache:/go/pkg/mod
+      - go-build-cache:/root/.cache/go-build
+    ports:
+      - "8080:8080"
+    environment:
+      - GOPATH=/go
+      - GOPROXY=https://proxy.golang.org,direct
+    command: sleep infinity
+    user: vscode
+
+volumes:
+  go-mod-cache:
+  go-build-cache:
