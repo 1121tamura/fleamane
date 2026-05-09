@@ -77,12 +77,12 @@ Chrome拡張（Manifest V3）
 
 ```bash
 # メインプロセスが自分自身をサブコマンドで子プロセス起動
-./frima serve --service=mercari       # :8001
-./frima serve --service=yahooauction  # :8002
-./frima serve --service=listing       # :8003
-./frima serve --service=notification  # :8004
-./frima serve --service=pricing       # :8005
-./frima serve --service=accounting    # :8006
+./fleamane serve --service=mercari       # :8001
+./fleamane serve --service=yahooauction  # :8002
+./fleamane serve --service=listing       # :8003
+./fleamane serve --service=notification  # :8004
+./fleamane serve --service=pricing       # :8005
+./fleamane serve --service=accounting    # :8006
 ```
 
 ### DDDレイヤー構成（各サービス共通）
@@ -102,10 +102,8 @@ Infrastructure層（repository/） ← DB・外部API
 ## 4. プロジェクト構成
 
 ```
-{{APP_NAME}}/
-├── cmd/
-│   └── frima/
-│       └── main.go                  # エントリーポイント・サブコマンド管理
+fleamane/
+├── main.go                          # エントリーポイント・サブコマンド管理
 │
 ├── internal/
 │   ├── launcher/                    # サービス起動・終了管理
@@ -116,6 +114,7 @@ Infrastructure層（repository/） ← DB・外部API
 │   │   └── browser.go
 │   ├── shared/                      # 共通コード
 │   │   ├── db/                      # SQLite接続・マイグレーション
+│   │   │   └── migrations/          # マイグレーションSQLファイル
 │   │   ├── middleware/              # 認証・ロギング・CORS
 │   │   └── models/                  # 共通モデル
 │   │
@@ -141,10 +140,6 @@ Infrastructure層（repository/） ← DB・外部API
 │
 ├── api/
 │   └── openapi.yaml                 # OpenAPI仕様書（API First）
-│
-├── db/
-│   ├── migrations/                  # マイグレーションファイル
-│   └── frima.db                     # SQLiteファイル（.gitignore対象）
 │
 ├── frontend/                        # React 19 フロントエンド
 │   ├── src/
