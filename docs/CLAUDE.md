@@ -161,7 +161,7 @@ internal/services/{service_name}/
 cd frontend && npm run dev
 
 # マイグレーション実行
-migrate -path db/migrations -database "sqlite3://frima.db" up
+migrate -path db/migrations -database "sqlite3://fleamane.db" up
 
 # OpenAPIコード生成
 go generate ./api/...

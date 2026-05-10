@@ -3,7 +3,7 @@
 ## 基本方針
 - DB：SQLite（WALモード）
 - マイグレーション：golang-migrate
-- ファイルパス：config.yamlで指定（デフォルト：`./frima.db`）
+- ファイルパス：config.yamlで指定（デフォルト：`./fleamane.db`）
 - テーブルのプレフィックスでサービスを識別
 
 ---
@@ -49,7 +49,7 @@ INSERT INTO app_settings (key, value, category, description) VALUES
 
 -- 会計設定
 ('accounting.format',     'yayoi',               'accounting', '会計フォーマット'),
-('accounting.output_dir', '~/Downloads/frima',   'accounting', 'CSV出力先');
+('accounting.output_dir', '~/Downloads/fleamane',   'accounting', 'CSV出力先');
 ```
 
 ---
@@ -124,9 +124,9 @@ CREATE TABLE listing_status_history (
 
 ## 3. 売上・取引データ
 
-### transactions（取引）
+### trades（取引）
 ```sql
-CREATE TABLE transactions (
+CREATE TABLE trades (
     id                  INTEGER PRIMARY KEY AUTOINCREMENT,
     listing_id          INTEGER NOT NULL REFERENCES listings(id),
     platform_account_id INTEGER NOT NULL REFERENCES platform_accounts(id),
@@ -259,8 +259,8 @@ CREATE TABLE accounting_exports (
 CREATE INDEX idx_listings_platform_status ON listings(platform, status);
 CREATE INDEX idx_listings_listed_at ON listings(listed_at);
 CREATE INDEX idx_listings_sold_at ON listings(sold_at);
-CREATE INDEX idx_transactions_completed_at ON transactions(completed_at);
-CREATE INDEX idx_transactions_platform_account ON transactions(platform_account_id);
+CREATE INDEX idx_trades_completed_at ON trades(completed_at);
+CREATE INDEX idx_trades_platform_account ON trades(platform_account_id);
 CREATE INDEX idx_fetch_jobs_status ON fetch_jobs(status);
 CREATE INDEX idx_system_logs_created_at ON system_logs(created_at);
 ```

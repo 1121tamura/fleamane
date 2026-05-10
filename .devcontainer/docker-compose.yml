@@ -7,12 +7,14 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ..:/workspace:cached
-      - go-mod-cache:/go/pkg/mod
-      - go-build-cache:/root/.cache/go-build
+      - go-mod-cache:/home/vscode/go/pkg/mod
+      - go-build-cache:/home/vscode/.cache/go-build
+      - claude-data:/home/vscode/.claude
     ports:
       - "8080:8080"
     environment:
-      - GOPATH=/go
+      - GOPATH=/home/vscode/go
+      - GOCACHE=/home/vscode/.cache/go-build
       - GOPROXY=https://proxy.golang.org,direct
     command: sleep infinity
     user: vscode
@@ -20,3 +22,4 @@ services:
 volumes:
   go-mod-cache:
   go-build-cache:
+  claude-data:
